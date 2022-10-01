@@ -5,6 +5,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
+    // console.log(process.env.REACT_APP_API_URL);
+    // console.log(process.env.NODE_ENV);
+
+
     return (
         <Router>
             <Routes>
