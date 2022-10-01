@@ -1,7 +1,33 @@
+import { useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
+import { useRegisterMutation } from "../features/auth/authApi";
 
 export default function Register() {
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [canSubmit, setCanSubmit] = useState(false)
+    const [register, { isLoading, error, isError }] = useRegisterMutation()
+
+
+
+    const hadleSubmit = (e) => {
+        e.preventDefault()
+        const user = { name, email, password }
+        console.log(user);
+        try {
+            register(user)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -18,7 +44,7 @@ export default function Register() {
                             Create your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form onSubmit={hadleSubmit} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -26,6 +52,8 @@ export default function Register() {
                                     Full Name
                                 </label>
                                 <input
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     id="name"
                                     name="Name"
                                     type="Name"
@@ -44,6 +72,8 @@ export default function Register() {
                                     Email address
                                 </label>
                                 <input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -59,6 +89,8 @@ export default function Register() {
                                     Password
                                 </label>
                                 <input
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -77,6 +109,8 @@ export default function Register() {
                                     Confirm Password
                                 </label>
                                 <input
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                     id="confirmPassword"
                                     name="confirmPassword"
                                     type="confirmPassword"
@@ -107,8 +141,9 @@ export default function Register() {
 
                         <div>
                             <button
+
                                 type="submit"
-                                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
+                                className="submit group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
                             >
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
                                 Sign up

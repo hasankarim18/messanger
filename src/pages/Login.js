@@ -1,8 +1,31 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
 import Error from "../components/ui/Error";
+import { useLoginMutation } from "../features/auth/authApi";
 
 export default function Login() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+
+    const [login, { data, isSuccess, isError }] = useLoginMutation()
+
+    const loginHandler = (e) => {
+        e.preventDefault()
+        const loginInfo = { email: email, password: password }
+
+        try {
+            login(loginInfo)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+
+
     return (
         <div className="grid place-items-center h-screen bg-[#F9FAFB">
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -19,7 +42,9 @@ export default function Login() {
                             Sign in to your account
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form
+                        onSubmit={loginHandler}
+                        className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" value="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
@@ -30,6 +55,8 @@ export default function Login() {
                                     Email address
                                 </label>
                                 <input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     id="email-address"
                                     name="email"
                                     type="email"
@@ -44,6 +71,8 @@ export default function Login() {
                                     Password
                                 </label>
                                 <input
+                                    value={password}
+                                    onChange={(e) => { setPassword(e.target.value) }}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -74,8 +103,10 @@ export default function Login() {
                                 Sign in
                             </button>
                         </div>
+                        {
+                            isError && <Error message="There was an error" />
+                        }
 
-                        <Error message="There was an error" />
                     </form>
                 </div>
             </div>
