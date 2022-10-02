@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/images/lws-logo-light.svg";
+import Error from "../components/ui/Error";
 import { useRegisterMutation } from "../features/auth/authApi";
 
 export default function Register() {
@@ -10,22 +11,47 @@ export default function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [agreed, setAggred] = useState(false)
     const [canSubmit, setCanSubmit] = useState(false)
-    const [register, { isLoading, error, isError }] = useRegisterMutation()
+    const [register, { isLoading, error, isError, isSuccess }] = useRegisterMutation()
+    const [passwordError, setPasswordError] = useState(false)
+    const navigate = useNavigate()
 
+    const resetForm = () => {
+        setName('')
+        setEmail('')
+        setPassword('')
+        setConfirmPassword('')
+        setAggred(false)
 
+    }
 
     const hadleSubmit = (e) => {
         e.preventDefault()
         const user = { name, email, password }
-        console.log(user);
+        setPasswordError(false)
         try {
-            register(user)
+            if (password !== confirmPassword) {
+                // error message
+                setPasswordError(true)
+            } else {
+                setPasswordError(false)
+                register(user)
+            }
+
         } catch (error) {
             console.log(error);
 
         }
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            resetForm()
+            navigate('/inbox')
+            setPasswordError(false)
+        }
+    }, [isSuccess, navigate])
 
 
     return (
@@ -125,7 +151,9 @@ export default function Register() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
                                 <input
-                                    id="remember-me"
+                                    checked={agreed}
+                                    onChange={(e) => setAggred(e.target.checked)}
+                                    id="accept-terms"
                                     name="remember-me"
                                     type="checkbox"
                                     className="h-4 w-4 text-violet-600 focus:ring-violet-500 border-gray-300 rounded"
@@ -138,10 +166,13 @@ export default function Register() {
                                 </label>
                             </div>
                         </div>
+                        {
+                            passwordError && <Error message="Password did not match" />
+                        }
 
                         <div>
                             <button
-
+                                disabled={isLoading}
                                 type="submit"
                                 className="submit group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
                             >
@@ -150,6 +181,19 @@ export default function Register() {
                             </button>
                         </div>
                     </form>
+                    {
+                        isError && <Error message={error.data} />
+                    }
+                    <div className="flex items-center justify-end">
+                        <div className="text-sm">
+                            <Link
+                                to="/"
+                                className="font-medium text-violet-600 hover:text-violet-500"
+                            >
+                                Back to login
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
