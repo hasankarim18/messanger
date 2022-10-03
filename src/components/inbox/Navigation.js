@@ -10,6 +10,7 @@ export default function Navigation() {
     const logoutHandler = () => {
         dispatch(userLogeedOut())
         localStorage.removeItem('auth')
+        // localStoreage.clear()
     }
 
     return (
