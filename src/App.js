@@ -5,6 +5,8 @@ import Inbox from "./pages/Inbox";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/Private/PrivateRoute";
+import PublicRoute from "./components/Private/PublicRoute";
+
 
 
 function App() {
@@ -26,15 +28,17 @@ function App() {
                         <Route
                             path="/"
                             element={
-
-                                <Login />
+                                <PublicRoute>
+                                    <Login />
+                                </PublicRoute>
 
                             } />
                         <Route
                             path="/register"
                             element={
-
-                                <Register />
+                                <PublicRoute>
+                                    <Register />
+                                </PublicRoute>
 
                             } />
                         <Route
