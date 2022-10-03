@@ -5,7 +5,7 @@ import Inbox from "./pages/Inbox";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/Private/PrivateRoute";
-import PublicRoute from "./components/Private/PublicRoute";
+
 
 function App() {
     // console.log(process.env.REACT_APP_API_URL);
@@ -40,16 +40,16 @@ function App() {
                         <Route
                             path="/inbox"
                             element={
-
-                                <Conversation />
-
+                                <PrivateRoute>
+                                    <Conversation />
+                                </PrivateRoute>
                             } />
                         <Route
                             path="/inbox/:id"
                             element={
-
-                                <Inbox />
-
+                                <PrivateRoute>
+                                    <Inbox />
+                                </PrivateRoute>
                             } />
                     </Routes>
                 </Router>
