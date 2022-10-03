@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import useAuthCheck from "./hooks/useAuthCheck";
 import Conversation from "./pages/Conversation";
 import Inbox from "./pages/Inbox";
 import Login from "./pages/Login";
@@ -8,17 +9,27 @@ function App() {
     // console.log(process.env.REACT_APP_API_URL);
     // console.log(process.env.NODE_ENV);
 
+    const authChecked = useAuthCheck()
 
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/inbox" element={<Conversation />} />
-                <Route path="/inbox/:id" element={<Inbox />} />
-            </Routes>
-        </Router>
-    );
+
+
+    return <>
+        {
+            !authChecked
+                ?
+                <div> Checking authentication .... </div>
+                :
+                <Router>
+                    <Routes>
+                        <Route path="/" element={<Login />} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/inbox" element={<Conversation />} />
+                        <Route path="/inbox/:id" element={<Inbox />} />
+                    </Routes>
+                </Router>
+        }
+    </>
+
 }
 
 export default App;
