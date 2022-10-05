@@ -112,7 +112,7 @@ export default function Login() {
                             </button>
                         </div>
                         {
-                            isError && <Error message={error.data} />
+                            isError && <Error message={error?.error} />
                         }
 
                     </form>

@@ -1,22 +1,28 @@
 {
     "users": [
         {
-            "email": "sumit@learnwithsumit.com",
-            "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
-            "name": "Sumit Saha",
+            "email": "hasan@mail.com",
+            "password": "$2a$10$/vym.hK7FIsXUjfYyxck0OnQWXaE8YsOoe2dIMeQAbBFYqeI3NWq6",
+            "name": "Hasan Mahbub",
             "id": 1
         },
         {
-            "email": "akash@learnwithsumit.com",
-            "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
-            "name": "Akash Ahmed",
+            "email": "sumit@learnwithsumit.com",
+            "password": "$2a$10$bZThjqJawkz1YPw0w/0sHOduR8HsYEtWQFCwnTOTOIcyXoRgiwxH.",
+            "name": "Sumit",
             "id": 2
         },
         {
             "email": "saad@learnwithsumit.com",
-            "password": "$2a$10$CtHS.yCGS80jiuZx8yKEI.5zdiZykHF/6aPTDqpHl6ZqEFGISOHKO",
+            "password": "$2a$10$vyueIuPpqbjBR26E5FcuH.GY1wPpliD.sQTAmZNSFNbCpmoA9L41C",
             "name": "Saad Hasan",
             "id": 3
+        },
+        {
+            "email": "sumon@mail.com",
+            "password": "$2a$10$NsOcLkkcjP/0qWsyYEbn3..KxMaME4o4tHb/w1NjABli7/1r59.pG",
+            "name": "sumon",
+            "id": 4
         }
     ],
     "conversations": [

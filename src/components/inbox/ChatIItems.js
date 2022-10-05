@@ -22,6 +22,7 @@ export default function ChatItems() {
                     lastMessage="thanks for your support"
                     lastTime="15 minutes"
                 />
+
             </li>
         </ul>
     );

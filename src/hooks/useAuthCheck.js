@@ -22,7 +22,6 @@ const useAuthCheck = () => {
 
         setAuthChecked(true)
 
-
     }, [dispatch, setAuthChecked])
 
     // it will always return true 
