@@ -23,6 +23,18 @@
       "password": "$2a$10$NsOcLkkcjP/0qWsyYEbn3..KxMaME4o4tHb/w1NjABli7/1r59.pG",
       "name": "sumon",
       "id": 4
+    },
+    {
+      "email": "hallysust@gmail.com",
+      "password": "$2a$10$v8.3NCEUAmmaSDWwMdFq8OCbQ8efgx/oB1SKStMbxdbNm3Ker/yau",
+      "name": "Hally",
+      "id": 5
+    },
+    {
+      "email": "hasan.karim.2087@gmail.com",
+      "password": "$2a$10$rn4P3qERYr5eN0MLqUxnX.RYwf3rXMFdbM32d38w90OdtMqMRd3xe",
+      "name": "Hasan Karim",
+      "id": 6
     }
   ],
   "conversations": [
@@ -61,6 +73,24 @@
       ],
       "message": "How are you?",
       "timestamp": 1661976143678
+    },
+    {
+      "id": 3,
+      "participants": "hallysust@gmail.com-saad@learnwithsumit.com",
+      "users": [
+        {
+          "email": "hallysust@gmail.com",
+          "name": "Hally",
+          "id": 5
+        },
+        {
+          "email": "hasan.karim.2087@gmail.com",
+          "name": "Hasan Karim",
+          "id": 6
+        }
+      ],
+      "message": "How are you?",
+      "timestamp": 1661976143678
     }
   ],
   "messages": [
@@ -95,6 +125,38 @@
       },
       "message": "How are you?",
       "timestamp": 1661976143678
+    },
+    {
+      "id": 3,
+      "conversationId": 3,
+      "sender": {
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
+      },
+      "receiver": {
+        "email": "hasan.karim.2087@gmail.com",
+        "name": "Hasan Karim",
+        "id": 6
+      },
+      "message": "Hello I am Hally",
+      "timestamp": 1661976143558
+    },
+    {
+      "id": 4,
+      "conversationId": 3,
+      "sender": {
+        "email": "hasan.karim.2087@gmail.com",
+        "name": "Hasan Karim",
+        "id": 6
+      },
+      "receiver": {
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
+      },
+      "message": "Hello I am Hasan Karim",
+      "timestamp": 1661976143556
     }
   ]
 }

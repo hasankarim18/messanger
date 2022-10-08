@@ -1,4 +1,37 @@
+import { useState } from "react";
+import IsEmailValid from "../../utils/IsEmailValid";
+
 export default function Modal({ open, control }) {
+
+    const [to, setTo] = useState('')
+    const [message, setMessage] = useState('')
+
+    const debounceHandler = (fn, delay) => {
+        let timeoutId;
+        return (...arg) => {
+            clearTimeout(timeoutId)
+            timeoutId = setTimeout(() => {
+                fn(...arg)
+            }, delay);
+        }
+    }
+
+    const doSearch = (value) => {
+        if (IsEmailValid(value)) {
+            // chcck use api
+            setTo(value)
+
+
+        }
+
+    }
+
+
+
+    const handleSearch = debounceHandler(doSearch, 500)
+
+
+
     return (
         open && (
             <>
@@ -11,7 +44,7 @@ export default function Modal({ open, control }) {
                         Send message
                     </h2>
                     <form className="mt-8 space-y-6" action="#" method="POST">
-                        <input type="hidden" name="remember" value="true" />
+
                         <div className="rounded-md shadow-sm -space-y-px">
                             <div>
                                 <label htmlFor="to" className="sr-only">
@@ -20,10 +53,11 @@ export default function Modal({ open, control }) {
                                 <input
                                     id="to"
                                     name="to"
-                                    type="to"
+                                    type="email"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Send to"
+                                    onChange={(e) => handleSearch(e.target.value)}
                                 />
                             </div>
                             <div>
@@ -31,9 +65,11 @@ export default function Modal({ open, control }) {
                                     Message
                                 </label>
                                 <textarea
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     id="message"
                                     name="message"
-                                    type="message"
+                                    type="text"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                                     placeholder="Message"
