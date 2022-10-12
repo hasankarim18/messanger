@@ -18,7 +18,9 @@ const authApi = apiSlice.injectEndpoints({
                         accessToken: data.accessToken,
                         user: data.user
                     }))
+
                     dispatch(userLoggedIn(data))
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -37,6 +39,7 @@ const authApi = apiSlice.injectEndpoints({
                         accessToken: data.accessToken,
                         user: data.user
                     }))
+
                     dispatch(userLoggedIn(data))
                 } catch (error) {
                     console.log(error);

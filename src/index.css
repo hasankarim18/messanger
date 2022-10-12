@@ -14,3 +14,7 @@
 .submit:disabled {
     background-color: gray !important;
 }
+
+#new_message:disabled {
+    background-color: gray !important;
+}
