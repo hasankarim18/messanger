@@ -12,14 +12,14 @@ export const conversationsApi = apiSlice.injectEndpoints({
         addConversation: builder.mutation({
             query: (data) => ({
                 url: '/conversations',
-                methos: "POST",
+                method: "POST",
                 body: data
             })
         }),
         editConversation: builder.mutation({
             query: ({ id, data }) => ({
                 url: `conversations/${id}`,
-                methos: "PATCH",
+                method: "PATCH",
                 body: data
             })
         })

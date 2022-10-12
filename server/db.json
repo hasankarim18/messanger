@@ -47,6 +47,12 @@
       "password": "$2a$10$Bh/5qMoA/Sr3wfs8nPNzVOD7hgp2d70KCYcQ7QcUcVHnPxiGv8ad.",
       "name": "test2",
       "id": 8
+    },
+    {
+      "email": "test3@mail.com",
+      "password": "$2a$10$NKqJ41Y8fDOtrZ3V6Bq7U.orLCySlBp2mU/nLYj6YwpFVCq3zc60a",
+      "name": "test3",
+      "id": 9
     }
   ],
   "conversations": [
@@ -105,22 +111,23 @@
       "timestamp": 1661976143678
     },
     {
-      "id": 4,
-      "participants": "hallysust@gmail.com-test1@mail.com",
+      "participants": "test3@mail.com-hallysust@gmail.com",
       "users": [
         {
-          "email": "hallysust@gmail.com",
-          "name": "Hally",
-          "id": 5
+          "email": "test3@mail.com",
+          "name": "test3",
+          "id": 9
         },
         {
-          "email": "test1@mail.com",
-          "name": "tes1",
-          "id": 1
+          "email": "hallysust@gmail.com",
+          "password": "$2a$10$v8.3NCEUAmmaSDWwMdFq8OCbQ8efgx/oB1SKStMbxdbNm3Ker/yau",
+          "name": "Hally",
+          "id": 5
         }
       ],
-      "message": "Hello I am Hally!!!",
-      "timestamp": 1661976143678
+      "message": "Hi I am test 3",
+      "timestamp": 1665566036235,
+      "id": 4
     }
   ],
   "messages": [

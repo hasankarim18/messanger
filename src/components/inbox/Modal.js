@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { conversationsApi, useGetConversationQuery } from "../../features/conversations/conversationsApi";
+import {
+    conversationsApi,
+    useAddConversationMutation,
+    useEditConversationMutation
+} from "../../features/conversations/conversationsApi";
 import { useGetUserQuery } from "../../features/users/usersApi";
 import IsEmailValid from "../../utils/IsEmailValid";
 import Error from '../ui/Error'
@@ -31,9 +35,10 @@ export default function Modal({ open, control }) {
         skip: !userCheck,
     })
 
-    const { data: conversation } = useGetConversationQuery({ userEmail: myEmail, participantEmail: to }, {
-        skip: getConversaion
-    })
+    const [addConversation, { isSuccess: isAddConversationSuccess }] = useAddConversationMutation()
+
+    const [editConversation, { isSuccess: isEditConversationSuccess }] = useEditConversationMutation()
+
 
     //  console.log('to', to)
     const resetForm = () => {
@@ -105,7 +110,7 @@ export default function Modal({ open, control }) {
                             participantEmail: to
                         })
                 ).unwrap().then((data) => {
-                    //console.log(data)
+                    console.log(data)
                     setLastConversation(data)
                 }).catch(err => {
                     setResponseError('There was a problem')
@@ -137,8 +142,40 @@ export default function Modal({ open, control }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted message ')
+        if (lastConversation?.length > 0) {
+            // edit conversation 
+            console.log('edit conversation')
+            editConversation({
+                id: lastConversation[0].id,
+                data: {
+                    participants: `${myEmail}-${participant[0].email}`,
+                    users: [user, participant[0]],
+                    message: message,
+                    timestamp: new Date().getTime()
+                }
+            })
+
+
+        } else if (lastConversation?.length === 0) {
+            // add conversatio n
+            console.log('add conversation')
+            addConversation({
+                participants: `${myEmail}-${participant[0].email}`,
+                users: [user, participant[0]],
+                message: message,
+                timestamp: new Date().getTime()
+            })
+        }
+
     }
+
+    // listen conversation add/edit success 
+
+    useEffect(() => {
+        if (isAddConversationSuccess || isEditConversationSuccess) {
+            control()
+        }
+    }, [isAddConversationSuccess, isEditConversationSuccess])
 
     return (
         open && (
