@@ -70,4 +70,5 @@ export default App;
 // 9.11 conversation functionality moment // gravater-url master merge with cf
 // 9.12 messageApi and functionality and chathead with cleaver way
 
-// 10.1 and 10.2 Rquire api inside modal 
+// 10.1 and 10.2 Rquire api inside modal
+// 10.4 checking inside modal and checking new conversation 
