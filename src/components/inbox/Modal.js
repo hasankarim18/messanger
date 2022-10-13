@@ -47,6 +47,8 @@ export default function Modal({ open, control }) {
         setEmailNotValid(false)
         setBorderColor('')
         setLastConversation(undefined)
+        setMessage('')
+        setTo('')
     }
 
 
@@ -146,6 +148,7 @@ export default function Modal({ open, control }) {
             // edit conversation 
             console.log('edit conversation')
             editConversation({
+                sender: myEmail,
                 id: lastConversation[0].id,
                 data: {
                     participants: `${myEmail}-${participant[0].email}`,
@@ -160,10 +163,13 @@ export default function Modal({ open, control }) {
             // add conversatio n
             console.log('add conversation')
             addConversation({
-                participants: `${myEmail}-${participant[0].email}`,
-                users: [user, participant[0]],
-                message: message,
-                timestamp: new Date().getTime()
+                sender: myEmail,
+                data: {
+                    participants: `${myEmail}-${participant[0].email}`,
+                    users: [user, participant[0]],
+                    message: message,
+                    timestamp: new Date().getTime()
+                }
             })
         }
 
