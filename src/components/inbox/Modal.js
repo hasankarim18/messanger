@@ -40,7 +40,7 @@ export default function Modal({ open, control }) {
     const [editConversation, { isSuccess: isEditConversationSuccess }] = useEditConversationMutation()
 
 
-    //  console.log('to', to)
+
     const resetForm = () => {
         setIsMyEamil(false)
         setIsParticipantValid(true)
@@ -103,7 +103,7 @@ export default function Modal({ open, control }) {
                 setIsMyEamil(false)
                 setBorderColor('green')
                 // every thing is valid and now to check previous conversation          
-                //  console.log('Check previous conversation and send messages')
+
 
                 dispatch(
                     conversationsApi.endpoints.getConversation.initiate
@@ -112,7 +112,7 @@ export default function Modal({ open, control }) {
                             participantEmail: to
                         })
                 ).unwrap().then((data) => {
-                    console.log(data)
+
                     setLastConversation(data)
                 }).catch(err => {
                     setResponseError('There was a problem')
@@ -146,7 +146,7 @@ export default function Modal({ open, control }) {
         e.preventDefault()
         if (lastConversation?.length > 0) {
             // edit conversation 
-            console.log('edit conversation')
+
             editConversation({
                 sender: myEmail,
                 id: lastConversation[0].id,
@@ -161,7 +161,7 @@ export default function Modal({ open, control }) {
 
         } else if (lastConversation?.length === 0) {
             // add conversatio n
-            console.log('add conversation')
+
             addConversation({
                 sender: myEmail,
                 data: {

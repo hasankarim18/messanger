@@ -1,3 +1,4 @@
+import { isFulfilled } from "@reduxjs/toolkit";
 import { apiSlice } from "../api/apiSlice";
 
 
@@ -11,7 +12,15 @@ export const messagesApi = apiSlice.injectEndpoints({
                 url: '/messages',
                 method: "POST",
                 body: data
-            })
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+
+                try {
+                    const addedMessage = await queryFulfilled
+                } catch (error) {
+
+                }
+            }
         }),
     })
 })
