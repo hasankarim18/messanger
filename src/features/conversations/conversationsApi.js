@@ -5,7 +5,23 @@ import { messagesApi } from "../messages/mesagesApi";
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getConversations: builder.query({
-            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`
+            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`,
+            async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
+                // create socket 
+                const socket = io('http://localhost:9000', {
+
+                })
+
+                try {
+                    await cacheDataLoaded;
+                    socket.on("conversations", (data) => {
+                        console.log(data)
+                    })
+                } catch (error) {
+
+                }
+
+            }
         }),
         getConversation: builder.query({
             query: ({ userEmail, participantEmail }) => `/conversations?participants_like=${userEmail}-${participantEmail}&&participants_like=${participantEmail}-${userEmail}`
