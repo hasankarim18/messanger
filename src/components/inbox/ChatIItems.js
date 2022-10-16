@@ -32,6 +32,7 @@ export default function ChatItems() {
                 <li key={id}>
                     <Link to={`/inbox/${id}`} >
                         <ChatItem
+                            id={id}
                             avatar={avatar}
                             name={name}
                             lastMessage={message}

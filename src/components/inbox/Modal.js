@@ -1,6 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { conversationsApi, useGetConversationQuery } from "../../features/conversations/conversationsApi";
+import {
+    conversationsApi,
+    useAddConversationMutation,
+    useEditConversationMutation
+} from "../../features/conversations/conversationsApi";
 import { useGetUserQuery } from "../../features/users/usersApi";
 import IsEmailValid from "../../utils/IsEmailValid";
 import Error from '../ui/Error'
@@ -31,17 +35,20 @@ export default function Modal({ open, control }) {
         skip: !userCheck,
     })
 
-    const { data: conversation } = useGetConversationQuery({ userEmail: myEmail, participantEmail: to }, {
-        skip: getConversaion
-    })
+    const [addConversation, { isSuccess: isAddConversationSuccess }] = useAddConversationMutation()
 
-    //  console.log('to', to)
+    const [editConversation, { isSuccess: isEditConversationSuccess }] = useEditConversationMutation()
+
+
+
     const resetForm = () => {
         setIsMyEamil(false)
         setIsParticipantValid(true)
         setEmailNotValid(false)
         setBorderColor('')
         setLastConversation(undefined)
+        setMessage('')
+        setTo('')
     }
 
 
@@ -96,7 +103,7 @@ export default function Modal({ open, control }) {
                 setIsMyEamil(false)
                 setBorderColor('green')
                 // every thing is valid and now to check previous conversation          
-                //  console.log('Check previous conversation and send messages')
+
 
                 dispatch(
                     conversationsApi.endpoints.getConversation.initiate
@@ -105,16 +112,11 @@ export default function Modal({ open, control }) {
                             participantEmail: to
                         })
                 ).unwrap().then((data) => {
-                    //console.log(data)
                     setLastConversation(data)
                 }).catch(err => {
                     setResponseError('There was a problem')
                 })
-
                 //  setGetConversation(true)
-
-
-
             } else if (isSuccess && participant[0]?.email === myEmail) {
                 setIsParticipantValid(true)
                 setIsMyEamil(true)
@@ -137,8 +139,42 @@ export default function Modal({ open, control }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('submitted message ')
+        if (lastConversation?.length > 0) {
+            // edit conversation 
+
+            editConversation({
+                sender: myEmail,
+                id: lastConversation[0].id,
+                data: {
+                    participants: `${myEmail}-${participant[0].email}`,
+                    users: [user, participant[0]],
+                    message: message,
+                    timestamp: new Date().getTime()
+                }
+            })
+
+        } else if (lastConversation?.length === 0) {
+            // add conversatio n
+
+            addConversation({
+                sender: myEmail,
+                data: {
+                    participants: `${myEmail}-${participant[0].email}`,
+                    users: [user, participant[0]],
+                    message: message,
+                    timestamp: new Date().getTime()
+                }
+            })
+        }
     }
+
+    // listen conversation add/edit success 
+
+    useEffect(() => {
+        if (isAddConversationSuccess || isEditConversationSuccess) {
+            control()
+        }
+    }, [isAddConversationSuccess, isEditConversationSuccess])
 
     return (
         open && (

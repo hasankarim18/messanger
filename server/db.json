@@ -47,48 +47,23 @@
       "password": "$2a$10$Bh/5qMoA/Sr3wfs8nPNzVOD7hgp2d70KCYcQ7QcUcVHnPxiGv8ad.",
       "name": "test2",
       "id": 8
+    },
+    {
+      "email": "test3@mail.com",
+      "password": "$2a$10$NKqJ41Y8fDOtrZ3V6Bq7U.orLCySlBp2mU/nLYj6YwpFVCq3zc60a",
+      "name": "test3",
+      "id": 9
+    },
+    {
+      "email": "test4@mail.com",
+      "password": "$2a$10$DUTNab0d.deDL/AOoDYcPev6gUQTF83i3GfXRNdAn7lvUNNeE936y",
+      "name": "test4",
+      "id": 10
     }
   ],
   "conversations": [
     {
-      "id": 1,
-      "participants": "sumit@learnwithsumit.com-akash@learnwithsumit.com",
-      "users": [
-        {
-          "email": "sumit@learnwithsumit.com",
-          "name": "Sumit Saha",
-          "id": 1
-        },
-        {
-          "email": "akash@learnwithsumit.com",
-          "name": "Akash Ahmed",
-          "id": 2
-        }
-      ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 2,
-      "participants": "sumit@learnwithsumit.com-saad@learnwithsumit.com",
-      "users": [
-        {
-          "email": "sumit@learnwithsumit.com",
-          "name": "Sumit Saha",
-          "id": 1
-        },
-        {
-          "email": "akash@learnwithsumit.com",
-          "name": "Saad Hasan",
-          "id": 3
-        }
-      ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 3,
-      "participants": "hallysust@gmail.com-saad@learnwithsumit.com",
+      "participants": "hallysust@gmail.com-test2@mail.com",
       "users": [
         {
           "email": "hallysust@gmail.com",
@@ -96,16 +71,55 @@
           "id": 5
         },
         {
-          "email": "hasan.karim.2087@gmail.com",
-          "name": "Hasan Karim",
-          "id": 6
+          "email": "test2@mail.com",
+          "password": "$2a$10$Bh/5qMoA/Sr3wfs8nPNzVOD7hgp2d70KCYcQ7QcUcVHnPxiGv8ad.",
+          "name": "test2",
+          "id": 8
         }
       ],
-      "message": "How are you?",
-      "timestamp": 1661976143678
+      "message": "Message to test 2",
+      "timestamp": 1665817278627,
+      "id": 2
     },
     {
-      "id": 4,
+      "participants": "hallysust@gmail.com-test3@mail.com",
+      "users": [
+        {
+          "email": "hallysust@gmail.com",
+          "name": "Hally",
+          "id": 5
+        },
+        {
+          "email": "test3@mail.com",
+          "password": "$2a$10$NKqJ41Y8fDOtrZ3V6Bq7U.orLCySlBp2mU/nLYj6YwpFVCq3zc60a",
+          "name": "test3",
+          "id": 9
+        }
+      ],
+      "message": "Message to test 3",
+      "timestamp": 1665817292955,
+      "id": 3
+    },
+    {
+      "participants": "hallysust@gmail.com-test4@mail.com",
+      "users": [
+        {
+          "email": "hallysust@gmail.com",
+          "name": "Hally",
+          "id": 5
+        },
+        {
+          "email": "test4@mail.com",
+          "password": "$2a$10$DUTNab0d.deDL/AOoDYcPev6gUQTF83i3GfXRNdAn7lvUNNeE936y",
+          "name": "test4",
+          "id": 10
+        }
+      ],
+      "message": "Message to test 4",
+      "timestamp": 1665817305051,
+      "id": 4
+    },
+    {
       "participants": "hallysust@gmail.com-test1@mail.com",
       "users": [
         {
@@ -115,49 +129,35 @@
         },
         {
           "email": "test1@mail.com",
+          "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
           "name": "tes1",
-          "id": 1
+          "id": 7
         }
       ],
-      "message": "Hello I am Hally!!!",
-      "timestamp": 1661976143678
+      "message": "Hi I am Hally",
+      "timestamp": 1665887944814,
+      "id": 5
     }
   ],
   "messages": [
     {
-      "id": 1,
-      "conversationId": 1,
+      "conversationId": 2,
       "sender": {
-        "email": "sumit@learnwithsumit.com",
-        "name": "Sumit Saha",
-        "id": 1
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
       },
       "receiver": {
-        "email": "akash@learnwithsumit.com",
-        "name": "Akash Ahmed",
-        "id": 2
+        "email": "test2@mail.com",
+        "password": "$2a$10$Bh/5qMoA/Sr3wfs8nPNzVOD7hgp2d70KCYcQ7QcUcVHnPxiGv8ad.",
+        "name": "test2",
+        "id": 8
       },
-      "message": "Hello I am sumit",
-      "timestamp": 1661976143557
+      "message": "Message to test 2",
+      "timestamp": 1665817278627,
+      "id": 2
     },
     {
-      "id": 2,
-      "conversationId": 1,
-      "sender": {
-        "email": "akash@learnwithsumit.com",
-        "name": "Akash Ahmed",
-        "id": 2
-      },
-      "receiver": {
-        "email": "sumit@learnwithsumit.com",
-        "name": "Sumit Saha",
-        "id": 1
-      },
-      "message": "How are you?",
-      "timestamp": 1661976143678
-    },
-    {
-      "id": 3,
       "conversationId": 3,
       "sender": {
         "email": "hallysust@gmail.com",
@@ -165,60 +165,48 @@
         "id": 5
       },
       "receiver": {
-        "email": "hasan.karim.2087@gmail.com",
-        "name": "Hasan Karim",
-        "id": 6
+        "email": "test3@mail.com",
+        "password": "$2a$10$NKqJ41Y8fDOtrZ3V6Bq7U.orLCySlBp2mU/nLYj6YwpFVCq3zc60a",
+        "name": "test3",
+        "id": 9
       },
-      "message": "Hello I am Hally",
-      "timestamp": 1661976143558
+      "message": "Message to test 3",
+      "timestamp": 1665817292955,
+      "id": 3
     },
     {
-      "id": 4,
-      "conversationId": 3,
-      "sender": {
-        "email": "hasan.karim.2087@gmail.com",
-        "name": "Hasan Karim",
-        "id": 6
-      },
-      "receiver": {
-        "email": "hallysust@gmail.com",
-        "name": "Hally",
-        "id": 5
-      },
-      "message": "Hello I am Hasan Karim",
-      "timestamp": 1661976143556
-    },
-    {
-      "id": 5,
       "conversationId": 4,
       "sender": {
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
+      },
+      "receiver": {
+        "email": "test4@mail.com",
+        "password": "$2a$10$DUTNab0d.deDL/AOoDYcPev6gUQTF83i3GfXRNdAn7lvUNNeE936y",
+        "name": "test4",
+        "id": 10
+      },
+      "message": "Message to test 4",
+      "timestamp": 1665817305051,
+      "id": 4
+    },
+    {
+      "conversationId": 5,
+      "sender": {
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
+      },
+      "receiver": {
         "email": "test1@mail.com",
+        "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
         "name": "tes1",
-        "id": 6
-      },
-      "receiver": {
-        "email": "hallysust@gmail.com",
-        "name": "Hally",
-        "id": 5
-      },
-      "message": "Hello I am test 1",
-      "timestamp": 1661976143556
-    },
-    {
-      "id": 6,
-      "conversationId": 4,
-      "sender": {
-        "email": "hallysust@gmail.com",
-        "name": "Hally",
-        "id": 5
-      },
-      "receiver": {
-        "email": "test1@mail.com",
-        "name": "test1",
         "id": 7
       },
-      "message": "Hello I am Hally!!!",
-      "timestamp": 1661976143556
+      "message": "Hi I am Hally",
+      "timestamp": 1665887944814,
+      "id": 5
     }
   ]
 }

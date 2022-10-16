@@ -6,6 +6,9 @@ export default function ChatHead({ message }) {
 
     const { email } = user || {}
 
+    //  console.log('chat head message:', message);
+
+
     const { sender, receiver } = message || {}
 
     const partnerEmail = sender.email === email ? receiver.email : sender.email

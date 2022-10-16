@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
-const initialState = {}
+const initialState = {
+    conversationId: undefined,
+    sender: {},
+    receiver: {}
+}
 
 const conversationsSlice = createSlice({
     name: "conversations",
