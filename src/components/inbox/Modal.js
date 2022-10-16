@@ -112,16 +112,11 @@ export default function Modal({ open, control }) {
                             participantEmail: to
                         })
                 ).unwrap().then((data) => {
-
                     setLastConversation(data)
                 }).catch(err => {
                     setResponseError('There was a problem')
                 })
-
                 //  setGetConversation(true)
-
-
-
             } else if (isSuccess && participant[0]?.email === myEmail) {
                 setIsParticipantValid(true)
                 setIsMyEamil(true)
@@ -158,7 +153,6 @@ export default function Modal({ open, control }) {
                 }
             })
 
-
         } else if (lastConversation?.length === 0) {
             // add conversatio n
 
@@ -172,7 +166,6 @@ export default function Modal({ open, control }) {
                 }
             })
         }
-
     }
 
     // listen conversation add/edit success 

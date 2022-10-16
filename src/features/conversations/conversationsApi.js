@@ -25,9 +25,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         return newConversation.concat(arg.data)
                     })
                 )
-
                 // optimistic add conversation end 
-
                 try {
                     const conversation = await queryFulfilled
                     if (conversation?.data.id) {
@@ -49,8 +47,6 @@ export const conversationsApi = apiSlice.injectEndpoints({
                     // console.log(error)
                     addResult1.undo()
                 }
-
-
             }
         }),
         editConversation: builder.mutation({
@@ -64,7 +60,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 const patchResult1 = dispatch(
                     apiSlice.util.updateQueryData('getConversations', arg.sender, (draft) => {
                         //  console.log(draft)
-                        const draftConversation = draft.find(c => c.id == arg.id)
+                        const draftConversation = draft.find(c => c.id === arg.id)
                         draftConversation.message = arg.data.message
                         draftConversation.timestamp = arg.data.timestamp
                     })
@@ -79,13 +75,25 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         const senderUser = users.find(user => user.email === arg.sender)
                         const receiverUser = users.find(user => user.email !== arg.sender)
 
-                        dispatch(messagesApi.endpoints.addMessage.initiate({
+                        const res = await dispatch(messagesApi.endpoints.addMessage.initiate({
                             conversationId: conversation.data.id,
                             sender: senderUser,
                             receiver: receiverUser,
                             message: arg.data.message,
                             timestamp: arg.data.timestamp
-                        }))
+                        })).unwrap()
+                        //  console.log(res)
+                        // pesimistic update messages cache start 
+                        dispatch(
+                            apiSlice.util.updateQueryData(
+                                'getMessages',
+                                res.conversationId.toString(),
+                                (draft) => {
+                                    draft.push(res)
+                                })
+                        )
+
+                        // pesimistic update messages cache end
                     }
                 } catch (err) {
                     console.log(err)
@@ -100,28 +108,25 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 method: "DELETE"
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
-                // optimistic delete conversation start 
-                const deleteResult1 = dispatch(
-                    apiSlice.util.updateQueryData('getConversations', arg.id, (draft) => {
-                        //  console.log(draft)
-                        console.log('delete dranft')
-                    })
-                )
-                // optimisti delete conversation end
-
                 try {
                     const deleteConversation = await queryFulfilled
                     // console.log('delete conversation::', deleteConversation)
-                    console.log('delete success')
+                    //    console.log(deleteConversation.meta.response.status)                   
+
+                    dispatch(
+                        apiSlice.util.updateQueryData('getConversations', arg.id, (draft) => {
+                            console.log(draft)
+                            console.log('delete success dispatch')
+                        })
+                    )
+
                 } catch (error) {
                     console.log('delete failed')
                     console.log(error)
-                    deleteResult1.undo()
+                    // deleteResult1.undo()
                 }
             }
         })
-
     })
 })
 
@@ -132,3 +137,4 @@ export const {
     useEditConversationMutation,
     useDeleteConversationMutation
 } = conversationsApi
+

@@ -77,28 +77,9 @@
           "id": 8
         }
       ],
-      "message": "fasdfasdfd",
-      "timestamp": 1665814118989,
-      "id": 5
-    },
-    {
-      "participants": "hallysust@gmail.com-test1@mail.com",
-      "users": [
-        {
-          "email": "hallysust@gmail.com",
-          "name": "Hally",
-          "id": 5
-        },
-        {
-          "email": "test1@mail.com",
-          "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
-          "name": "tes1",
-          "id": 7
-        }
-      ],
-      "message": "djfasdfj;askdf;aj",
-      "timestamp": 1665814251640,
-      "id": 6
+      "message": "Message to test 2",
+      "timestamp": 1665817278627,
+      "id": 2
     },
     {
       "participants": "hallysust@gmail.com-test3@mail.com",
@@ -115,9 +96,9 @@
           "id": 9
         }
       ],
-      "message": "fa;sdkjf;askljf",
-      "timestamp": 1665814287759,
-      "id": 7
+      "message": "Message to test 3",
+      "timestamp": 1665817292955,
+      "id": 3
     },
     {
       "participants": "hallysust@gmail.com-test4@mail.com",
@@ -134,14 +115,33 @@
           "id": 10
         }
       ],
-      "message": "message to test 4",
-      "timestamp": 1665814367119,
-      "id": 8
+      "message": "Message to test 4",
+      "timestamp": 1665817305051,
+      "id": 4
+    },
+    {
+      "participants": "hallysust@gmail.com-test1@mail.com",
+      "users": [
+        {
+          "email": "hallysust@gmail.com",
+          "name": "Hally",
+          "id": 5
+        },
+        {
+          "email": "test1@mail.com",
+          "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
+          "name": "tes1",
+          "id": 7
+        }
+      ],
+      "message": "Hi I am Hally",
+      "timestamp": 1665887944814,
+      "id": 5
     }
   ],
   "messages": [
     {
-      "conversationId": 5,
+      "conversationId": 2,
       "sender": {
         "email": "hallysust@gmail.com",
         "name": "Hally",
@@ -153,29 +153,12 @@
         "name": "test2",
         "id": 8
       },
-      "message": "fasdfasdfd",
-      "timestamp": 1665814118989,
-      "id": 6
+      "message": "Message to test 2",
+      "timestamp": 1665817278627,
+      "id": 2
     },
     {
-      "conversationId": 6,
-      "sender": {
-        "email": "hallysust@gmail.com",
-        "name": "Hally",
-        "id": 5
-      },
-      "receiver": {
-        "email": "test1@mail.com",
-        "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
-        "name": "tes1",
-        "id": 7
-      },
-      "message": "djfasdfj;askdf;aj",
-      "timestamp": 1665814251640,
-      "id": 7
-    },
-    {
-      "conversationId": 7,
+      "conversationId": 3,
       "sender": {
         "email": "hallysust@gmail.com",
         "name": "Hally",
@@ -187,12 +170,12 @@
         "name": "test3",
         "id": 9
       },
-      "message": "fa;sdkjf;askljf",
-      "timestamp": 1665814287759,
-      "id": 8
+      "message": "Message to test 3",
+      "timestamp": 1665817292955,
+      "id": 3
     },
     {
-      "conversationId": 8,
+      "conversationId": 4,
       "sender": {
         "email": "hallysust@gmail.com",
         "name": "Hally",
@@ -204,9 +187,26 @@
         "name": "test4",
         "id": 10
       },
-      "message": "message to test 4",
-      "timestamp": 1665814367119,
-      "id": 9
+      "message": "Message to test 4",
+      "timestamp": 1665817305051,
+      "id": 4
+    },
+    {
+      "conversationId": 5,
+      "sender": {
+        "email": "hallysust@gmail.com",
+        "name": "Hally",
+        "id": 5
+      },
+      "receiver": {
+        "email": "test1@mail.com",
+        "password": "$2a$10$B2cwGqdK26glNQO/Hh73ruJXe0LK0yZsDhTiTuK9PQMdhtOvNEJHG",
+        "name": "tes1",
+        "id": 7
+      },
+      "message": "Hi I am Hally",
+      "timestamp": 1665887944814,
+      "id": 5
     }
   ]
 }
