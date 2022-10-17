@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 export const messagesApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getMessages: builder.query({
-            query: (id) => `/messages?conversationId=${id}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_MESSAGES_PER_PAGE}`,
+            query: ({ loggegInuser, id }) => `/messages?conversationId=${id}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_MESSAGES_PER_PAGE}`,
             async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 // create socket 
                 const socket = io('http://localhost:9000', {
@@ -26,6 +26,10 @@ export const messagesApi = apiSlice.injectEndpoints({
                         updateCachedData(draft => {
 
                             const message = draft.find(m => m.conversationId == data.data.conversationId);
+                            console.log('logged in user', arg.loggegInuser.email)
+                            console.log('sender', data.data.sender.email)
+                            console.log('receiver', data.data.receiver.email)
+                            console.log(data)
 
                             if (message?.id) {
                                 // update conversation   
