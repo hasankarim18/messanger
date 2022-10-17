@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getConversations: builder.query({
-            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`,
+            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=2`,
             // onChacheEntryAdded
             async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 // create socket 
@@ -43,6 +43,33 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 }
 
             }
+        }),
+        getMoreConversations: builder.query({
+            query: ({ email, page }) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=${page}&_limit=2`,
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                //  console.log('edit conversation')
+                try {
+                    const conversations = await queryFulfilled
+                    if (conversations?.length > 0) {
+
+                        // pesimistic update conversation cache start 
+                        dispatch(
+                            apiSlice.util.updateQueryData(
+                                'getConversations',
+                                arg.email,
+                                (draft) => {
+                                    return [...draft, ...conversations]
+                                })
+                        )
+                        // pesimistic update messages cache end
+                    }
+                } catch (err) {
+                    console.log(err)
+                    //  patchResult1.undo()
+                }
+
+            } // async function
+
         }),
         getConversation: builder.query({
             query: ({ userEmail, participantEmail }) => `/conversations?participants_like=${userEmail}-${participantEmail}&&participants_like=${participantEmail}-${userEmail}`
