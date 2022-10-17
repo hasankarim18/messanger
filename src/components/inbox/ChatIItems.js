@@ -26,6 +26,7 @@ export default function ChatItems() {
     } else if (!isLoading && !isError && conversations?.length > 0) {
         content = conversations.map(item => {
             const { message, id, timestamp } = item
+
             const { name, email: partnerEmail } = getPartnerInfo(item.users, adminEmail)
             const avatar = gravatarUrl(partnerEmail, { size: 80 })
             return (

@@ -1,24 +1,45 @@
 import { apiSlice } from "../api/apiSlice";
 import { messagesApi } from "../messages/mesagesApi";
+import io from 'socket.io-client'
 
 
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getConversations: builder.query({
             query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`,
+            // onChacheEntryAdded
             async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 // create socket 
                 const socket = io('http://localhost:9000', {
-
+                    reconnectionDelay: 1000,
+                    reconnection: true,
+                    reconnectionAttempts: 10,
+                    transports: ["websocket"],
+                    agent: false,
+                    upgrade: false,
+                    rejectUnauthorized: false
                 })
 
                 try {
                     await cacheDataLoaded;
                     socket.on("conversations", (data) => {
-                        console.log(data)
+                        // the data we provide to the server and return from server by eimitting
+                        // console.log(data)
+                        updateCachedData(draft => {
+                            const conversation = draft.find(c => c.id == data.data.id);
+
+                            if (conversation?.id) {
+                                // update conversation   
+                                conversation.message = data.data.message
+                                conversation.timestamp = data.data.timestamp
+                            } else {
+                                // do nothing or add conversation
+                            }
+                        })
                     })
                 } catch (error) {
-
+                    await cacheEntryRemoved;
+                    socket.close()
                 }
 
             }
@@ -72,7 +93,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                 body: data
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-
+                //  console.log('edit conversation')
                 try {
                     const conversation = await queryFulfilled
                     if (conversation?.data.id) {
@@ -81,7 +102,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         // const sender = arg.sender
                         const senderUser = users.find(user => user.email === arg.sender)
                         const receiverUser = users.find(user => user.email !== arg.sender)
-
+                        // updating message
                         const res = await dispatch(messagesApi.endpoints.addMessage.initiate({
                             conversationId: conversation.data.id,
                             sender: senderUser,

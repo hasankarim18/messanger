@@ -19,13 +19,40 @@ router.render = (req, res) => {
     const path = req.path;
     const method = req.method
     if (path.includes('/conversations') && (method === 'POST' || method === 'PATCH')) {
+        console.log(res.locals.data)
         // emit socket event 
         io.emit("conversations", {
             data: res.locals.data
         })
     }
+
+    if (path.includes('/messages') && (method === 'POST')) {
+
+        io.emit("messages", {
+            data: res.locals.data
+        })
+    }
+
     res.json(res.locals.data)
+
 }
+
+//  response meddle ware for message 
+// router.render = (req, res) => {
+//     const path = req.path;
+//     const method = req.method
+//     if (path.includes('/messages') && (method === 'POST')) {
+//         console.log(res.locals.data)
+//         // emit socket event 
+
+//         io.emit("messages", {
+//             data: res.locals.data
+//         })
+//     }
+
+//     res.json(res.locals.data)
+
+// }
 
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 9000;
