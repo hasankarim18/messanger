@@ -6,7 +6,15 @@ import io from 'socket.io-client'
 export const conversationsApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getConversations: builder.query({
-            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=2`,
+            query: (email) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=1&_limit=${process.env.REACT_APP_CONVERSATIONS_PER_PAGE}`,
+            transformResponse(apiResponse, meta) {
+                const totalCount = meta.response.headers.get('X-Total-Count')
+                //   console.log('totalCount:::', totalCount)
+                return {
+                    data: apiResponse,
+                    totalCount
+                }
+            },
             // onChacheEntryAdded
             async onCacheEntryAdded(arg, { updateCachedData, cacheDataLoaded, cacheEntryRemoved }) {
                 // create socket 
@@ -26,7 +34,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
                         // the data we provide to the server and return from server by eimitting
                         // console.log(data)
                         updateCachedData(draft => {
-                            const conversation = draft.find(c => c.id == data.data.id);
+                            const conversation = draft.data.find(c => c.id == data.data.id);
 
                             if (conversation?.id) {
                                 // update conversation   
@@ -45,12 +53,12 @@ export const conversationsApi = apiSlice.injectEndpoints({
             }
         }),
         getMoreConversations: builder.query({
-            query: ({ email, page }) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=${page}&_limit=2`,
+            query: ({ email, page }) => `/conversations?participants_like=${email}&_sort=timestamp&_order=desc&_page=${page}&_limit=5`,
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 //  console.log('edit conversation')
                 try {
                     const conversations = await queryFulfilled
-                    if (conversations?.length > 0) {
+                    if (conversations?.data?.length > 0) {
 
                         // pesimistic update conversation cache start 
                         dispatch(
@@ -58,7 +66,11 @@ export const conversationsApi = apiSlice.injectEndpoints({
                                 'getConversations',
                                 arg.email,
                                 (draft) => {
-                                    return [...draft, ...conversations]
+                                    //  console.log(JSON.stringify(draft))
+                                    return {
+                                        data: [...draft.data, ...conversations.data],
+                                        totalCount: Number(draft.totalCount)
+                                    }
                                 })
                         )
                         // pesimistic update messages cache end
@@ -170,7 +182,7 @@ export const conversationsApi = apiSlice.injectEndpoints({
 
                     dispatch(
                         apiSlice.util.updateQueryData('getConversations', arg.id, (draft) => {
-                            console.log(draft)
+                            //  console.log(draft)
                             console.log('delete success dispatch')
                         })
                     )

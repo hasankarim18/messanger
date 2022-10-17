@@ -26,10 +26,10 @@ export const messagesApi = apiSlice.injectEndpoints({
                         updateCachedData(draft => {
 
                             const message = draft.find(m => m.conversationId == data.data.conversationId);
-                            console.log('logged in user', arg.loggegInuser.email)
-                            console.log('sender', data.data.sender.email)
-                            console.log('receiver', data.data.receiver.email)
-                            console.log(data)
+                            //  console.log('logged in user', arg.loggegInuser.email)
+                            //  console.log('sender', data.data.sender.email)
+                            //  console.log('receiver', data.data.receiver.email)
+                            //  console.log(data)
 
                             if (message?.id) {
                                 // update conversation   
