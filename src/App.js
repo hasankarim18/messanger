@@ -77,3 +77,4 @@ export default App;
 // 10.12 client side socket implementation
 // 10.13-start infinity scroll start
 // 10.13-end infinity scroll ends
+// 10.14 - base query customization start
